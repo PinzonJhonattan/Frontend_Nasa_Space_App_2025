@@ -47,6 +47,12 @@ export class Sidebar implements OnInit {
                 command: () => this.navigate('/dashboart')
             },
             {
+                label: 'Actividades',  
+                icon: 'pi pi-map',
+                styleClass: 'menu-item-activities',
+                command: () => this.navigate('/activities')
+            },
+            {
                 label: 'Files',
                 icon: 'pi pi-folder',
                 styleClass: 'menu-section-header',

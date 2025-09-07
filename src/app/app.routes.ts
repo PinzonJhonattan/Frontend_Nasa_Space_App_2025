@@ -3,8 +3,14 @@ import { Layout } from './layout/layout';
 import { Home } from './features/home/home';
 import { Dashboart } from './features/dashboart/dashboart';
 import { Intro } from './features/intro/intro';
+import { Activites } from './features/activites/activites';
 
 export const routes: Routes = [
+    {
+        path: "",
+        redirectTo: "intro",
+        pathMatch: "full"
+    },
     {
         path: "intro",
         component: Intro
@@ -18,13 +24,16 @@ export const routes: Routes = [
                 component: Home   
             },
             {
-                path: "",  // Ruta vacía
-                redirectTo: "home",  // Redirige a home
-                pathMatch: "full"
+                path: "home",  // Ruta vacía
+                component: Home
             },
             {
                 path: "dashboart",
                 component: Dashboart
+            },
+            {
+                path: 'activities',
+                component: Activites
             }
         ]
     }
