@@ -1,0 +1,31 @@
+.layout {
+    header {
+      margin-left: 280px; // El mismo ancho del sidebar
+      transition: margin-left 0.3s ease;
+    }
+    
+    main {
+      margin-left: 280px; // El mismo ancho del sidebar
+      transition: margin-left 0.3s ease;
+    }
+    
+    footer {
+      margin-left: 280px; // También el footer si quieres
+      transition: margin-left 0.3s ease;
+    }
+    
+    // Cuando el sidebar esté colapsado
+    &.sidebar-collapsed {
+      header {
+        margin-left: 70px; // El ancho del sidebar colapsado
+      }
+      
+      main {
+        margin-left: 70px;
+      }
+      
+      footer {
+        margin-left: 70px;
+      }
+    }
+  }
