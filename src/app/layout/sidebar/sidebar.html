@@ -3,8 +3,11 @@
     <!-- Header del Sidebar -->
     <div class="sidebar-header">
         <div >
-            <div class="flex justify-center items-center p-4">
+            <!--<div class="flex justify-center items-center p-4">
                 <img class="w-30 h-auto" src="assets/imagenes/capi_logo.svg" alt="logo" />
+            </div>-->
+            <div class="flex justify-center items-center p-4 text-2xl font-bold">
+                <h1>AstroChiguis</h1>
             </div>
         </div>
         <!-- <button 
@@ -48,4 +51,8 @@
         <img src="assets/imagenes/nasal.png" alt="logo" />  
         </div>
     </div>
+    <p-drawer [(visible)]="visible"  position="right">
+        <app-config-theme></app-config-theme>    
+    </p-drawer>
+
 </div>

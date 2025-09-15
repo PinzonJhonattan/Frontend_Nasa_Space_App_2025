@@ -5,6 +5,7 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
+/* import { AuraPreset } from './themes/aura-theme'; */
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,13 +16,11 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: false,
-
+          darkModeSelector: '.my-app-dark'
         }
       }
     }),
     provideAnimations(),
-    provideRouter(routes),
     provideHttpClient()
   ]
 };

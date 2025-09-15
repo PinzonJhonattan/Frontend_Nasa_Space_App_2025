@@ -1,0 +1,75 @@
+<!-- map.html -->
+<div class="p-4 min-h-screen ml-20 mr-20">
+
+  <div class="flex justify-center items-center mb-20 mt-20">
+    <h1 class="text-2xl font-bold font-size-50">Mapa</h1>
+  </div>
+
+
+  <div class="grid grid-cols-12 gap-6">
+    
+    <!-- Panel de información - Columna izquierda -->
+    <div class="col-span-12 lg:col-span-4 xl:col-span-3 space-y-4">
+      <p-card >
+        <div class="location-info mb-6">
+          <h3 class="text-2xl font-bold font-size-50">Información de selección Mapa</h3>
+        </div>
+        
+          <div class="flex flex-col gap-3">
+            <label class="text-sm font-medium font-size-20  font-bold">Posición Seleccionada</label>
+            <div class="flex gap-2">
+              <p-tag 
+                severity="info" 
+                [value]="(selectedPosition()?.[0] | number: '1.6-6') ?? '0.0'" 
+                class="flex-1">
+              </p-tag>
+              <p-tag 
+                severity="info" 
+                [value]="(selectedPosition()?.[1] | number: '1.6-6') ?? '0.0'"
+                class="flex-1">
+              </p-tag>
+            </div>
+          </div>
+
+        <div class="space-y-6 mt-4">
+          <div class="flex flex-col gap-3">
+            <label class="text-sm font-medium font-size-20 font-bold">Nivel de Zoom</label>
+            <p-tag 
+              severity="success" 
+              [value]="'Zoom: ' + (zoom() | number: '1.2-2')"
+              class="w-fit">
+            </p-tag>
+          </div>
+
+
+          <div class="flex  gap-3 pt-4">
+            <p-button 
+              label="Centrar en Posición" 
+              icon="pi pi-map-marker" 
+              (onClick)="centerOnPosition()"
+              class="w-full">
+            </p-button>
+            
+            <p-button 
+              label="Reset Vista" 
+              icon="pi pi-refresh" 
+              [outlined]="true"
+              (onClick)="resetView()"
+              class="w-full">
+            </p-button>
+          </div>
+        </div>
+      </p-card>
+    </div>
+
+    <!-- Mapa - Columna derecha -->
+    <div class="col-span-12 lg:col-span-8 xl:col-span-9 space-y-4">
+      <p-card>
+        <div #mapContainer id="map-container" class=" h-150"></div>
+      </p-card>
+    </div>
+
+
+    
+  </div>
+</div>

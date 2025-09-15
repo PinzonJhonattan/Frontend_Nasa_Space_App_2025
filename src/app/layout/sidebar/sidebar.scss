@@ -11,6 +11,9 @@
     z-index: 1000;
     transition: width 0.3s ease;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--p-surface-200); 
+
+    
     
 
 
@@ -28,6 +31,7 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
+
 
         .user-info {
             flex: 1;
@@ -106,6 +110,7 @@
     }
 }
 
+
 // PanelMenu Styles
 ::ng-deep .p-panelmenu {
     border: none !important;
@@ -143,11 +148,57 @@
             }
         }
         
+        // Estilos súper específicos para todos los iconos
+        .p-panelmenu * i,
+        .p-panelmenu * .pi,
+        .p-panelmenu * [class*="pi-"],
+        .p-panelmenu * .p-menuitem-icon,
+        .p-panelmenu i,
+        .p-panelmenu .pi,
+        .p-panelmenu [class*="pi-"],
+        .p-panelmenu .p-menuitem-icon {
+            color: var(--p-primary-color) !important;
+            font-size: 1.1rem !important;
+        }
+        
+        // Estilos para headers
+        .p-panelmenu-header * i,
+        .p-panelmenu-header * .pi,
+        .p-panelmenu-header * [class*="pi-"],
+        .p-panelmenu-header i,
+        .p-panelmenu-header .pi,
+        .p-panelmenu-header [class*="pi-"] {
+            font-size: 1.2rem !important;
+        }
+        
         // Quitar todas las líneas divisorias
         .p-menuitem-separator {
+
             border: none !important;
             height: 0 !important;
         }
+
+    }
+}
+
+// Dark mode support - forzar el cambio de variable CSS
+:host-context(.my-app-dark) .modern-sidebar {
+    background-color: var(--p-surface-800) !important;
+}
+
+// Estilos globales para iconos del sidebar - último recurso
+::ng-deep .modern-sidebar {
+    .p-panelmenu i,
+    .p-panelmenu .pi,
+    .p-panelmenu [class*="pi-"],
+    .p-panelmenu .p-menuitem-icon {
+        color: var(--p-primary-color) !important;
+    }
+    
+    .p-panelmenu-header i,
+    .p-panelmenu-header .pi,
+    .p-panelmenu-header [class*="pi-"] {
+        font-size: 1.2rem !important;
     }
 }
 

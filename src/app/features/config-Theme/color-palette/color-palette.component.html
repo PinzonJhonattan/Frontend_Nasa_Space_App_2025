@@ -1,0 +1,154 @@
+<div class="nasa-color-palette-panel">
+  <div class="nasa-color-palette">
+    <div class="nasa-color-palette-label">Colores Principales</div>
+    <div class="nasa-color-palette-items">
+      <button
+        class="nasa-color-palette-item nasa-color-palette-emerald"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('emerald')}"
+        (click)="setPrimaryColor('emerald')"
+        [pTooltip]="'emerald'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-green"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('green')}"
+        (click)="setPrimaryColor('green')"
+        [pTooltip]="'green'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-lime"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('lime')}"
+        (click)="setPrimaryColor('lime')"
+        [pTooltip]="'lime'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-red"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('red')}"
+        (click)="setPrimaryColor('red')"
+        [pTooltip]="'red'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-orange"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('orange')}"
+        (click)="setPrimaryColor('orange')"
+        [pTooltip]="'orange'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-amber"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('amber')}"
+        (click)="setPrimaryColor('amber')"
+        [pTooltip]="'amber'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-yellow"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('yellow')}"
+        (click)="setPrimaryColor('yellow')"
+        [pTooltip]="'yellow'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-teal"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('teal')}"
+        (click)="setPrimaryColor('teal')"
+        [pTooltip]="'teal'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-cyan"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('cyan')}"
+        (click)="setPrimaryColor('cyan')"
+        [pTooltip]="'cyan'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-sky"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('sky')}"
+        (click)="setPrimaryColor('sky')"
+        [pTooltip]="'sky'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-blue"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('blue')}"
+        (click)="setPrimaryColor('blue')"
+        [pTooltip]="'blue'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-indigo"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('indigo')}"
+        (click)="setPrimaryColor('indigo')"
+        [pTooltip]="'indigo'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-violet"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('violet')}"
+        (click)="setPrimaryColor('violet')"
+        [pTooltip]="'violet'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-purple"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('purple')}"
+        (click)="setPrimaryColor('purple')"
+        [pTooltip]="'purple'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-fuchsia"
+        [ngClass]="{'nasa-color-palette-selected': isPrimaryColor('fuchsia')}"
+        (click)="setPrimaryColor('fuchsia')"
+        [pTooltip]="'fuchsia'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+
+    </div>
+  </div>
+
+  <div class="nasa-color-palette">
+    <div class="nasa-color-palette-label">Colores de Superficie</div>
+    <div class="nasa-color-palette-items">
+      <button
+        class="nasa-color-palette-item nasa-color-palette-slate"
+        [ngClass]="{'nasa-surface-color-palette-selected': isSurfaceColor('slate')}"
+        (click)="setSurfaceColor('slate')"
+        [pTooltip]="'slate'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-gray"
+        [ngClass]="{'nasa-surface-color-palette-selected': isSurfaceColor('gray')}"
+        (click)="setSurfaceColor('gray')"
+        [pTooltip]="'gray'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-zinc"
+        [ngClass]="{'nasa-surface-color-palette-selected': isSurfaceColor('zinc')}"
+        (click)="setSurfaceColor('zinc')"
+        [pTooltip]="'zinc'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-neutral"
+        [ngClass]="{'nasa-surface-color-palette-selected': isSurfaceColor('neutral')}"
+        (click)="setSurfaceColor('neutral')"
+        [pTooltip]="'neutral'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>
+      <button
+        class="nasa-color-palette-item nasa-color-palette-stone"
+        [ngClass]="{'nasa-surface-color-palette-selected': isSurfaceColor('stone')}"
+        (click)="setSurfaceColor('stone')"
+        [pTooltip]="'stone'"
+        showDelay="1000"
+        tooltipPosition="bottom"></button>   
+    </div>
+  </div>
+</div>
