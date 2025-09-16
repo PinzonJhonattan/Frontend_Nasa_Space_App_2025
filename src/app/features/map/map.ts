@@ -74,7 +74,7 @@ export class MapComponent implements OnInit, OnDestroy {
     if (position && this.map) {
       this.map.flyTo({
         center: position,
-        zoom: 17
+        zoom: 13
       });
     }
   }
