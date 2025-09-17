@@ -1,75 +1,266 @@
 <!-- map.html -->
-<div class="p-4 min-h-screen ml-20 mr-20">
+<div class="p-4 min-h-screen">
 
-  <div class="flex justify-center items-center mb-20 mt-20">
-    <h1 class="text-2xl font-bold font-size-50">Mapa</h1>
+  <!-- Título principal -->
+  <div class="flex justify-center items-center mb-2 mt-2">
+    <h1 class="text-2xl font-bold">Pronóstico de Condiciones para Eventos</h1>
   </div>
 
+  <!-- Contenedor del mapa -->
+  <div class="mb-8">
+    <p-card>
+      <div #mapContainer id="map-container" class="h-120"></div>
+    </p-card>
+  </div>
 
-  <div class="grid grid-cols-12 gap-6">
+  <!-- Panel de información reorganizado -->
+  <div class="max-w-6xl mx-auto space-y-6">
     
-    <!-- Panel de información - Columna izquierda -->
-    <div class="col-span-12 lg:col-span-4 xl:col-span-3 space-y-4">
-      <p-card >
-        <div class="location-info mb-6">
-          <h3 class="text-2xl font-bold font-size-50">Información de selección Mapa</h3>
+    <!-- Información básica del mapa -->
+    <p-card>
+      <div class="text-center mb-6">
+        <h3 class="text-xl font-bold mb-2">Información del Mapa</h3>
+        <div class="w-16 h-1 bg-blue-500 mx-auto rounded"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div class="text-center">
+          <label class="block text-sm font-semibold mb-3 uppercase tracking-wide">
+            Latitud
+          </label>
+          <p-tag 
+            severity="info" 
+            [value]="(selectedPosition()?.[0] | number: '1.4-4') || '0.0000'" 
+            class="w-full">
+          </p-tag>
         </div>
         
-          <div class="flex flex-col gap-3">
-            <label class="text-sm font-medium font-size-20  font-bold">Posición Seleccionada</label>
-            <div class="flex gap-2">
-              <p-tag 
-                severity="info" 
-                [value]="(selectedPosition()?.[0] | number: '1.6-6') ?? '0.0'" 
-                class="flex-1">
-              </p-tag>
-              <p-tag 
-                severity="info" 
-                [value]="(selectedPosition()?.[1] | number: '1.6-6') ?? '0.0'"
-                class="flex-1">
-              </p-tag>
+        <div class="text-center">
+          <label class="block text-sm font-semibold mb-3 uppercase tracking-wide">
+            Longitud
+          </label>
+          <p-tag 
+            severity="info" 
+            [value]="(selectedPosition()?.[1] | number: '1.4-4') || '0.0000'"
+            class="w-full">
+          </p-tag>
+        </div>
+        
+        <div class="text-center">
+          <label class="block text-sm font-semibold mb-3 uppercase tracking-wide">
+            Nivel de Zoom
+          </label>
+          <p-tag 
+            severity="success" 
+            [value]="(zoom() | number: '1.1-1') || '0.0'"
+            class="w-full">
+          </p-tag>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-200 pt-6">
+        <div class="text-center mb-6">
+          <p class="text-sm flex items-center justify-center">
+            <i class="pi pi-map text-blue-500 mr-2"></i>
+            Selecciona un punto en el mapa para obtener información detallada
+          </p>
+        </div>
+
+        <div class="flex justify-center gap-4">
+          <p-button 
+            label="Centrar Posición" 
+            icon="pi pi-map-marker" 
+            (onClick)="centerOnPosition()"
+            class="px-6">
+          </p-button>
+          
+          <p-button 
+            label="Resetear Vista" 
+            icon="pi pi-refresh" 
+            [outlined]="true"
+            (onClick)="resetView()"
+            class="px-6">
+          </p-button>
+
+          <p-button 
+            label="Limpiar Selección" 
+            icon="pi pi-times" 
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="clearSelection()"
+            class="px-6">
+          </p-button>
+        </div>
+      </div>
+    </p-card>
+
+    <!-- Panel de configuración del evento -->
+    <p-card>
+      <div class="text-center mb-6">
+        <h3 class="text-xl font-bold mb-2">Configuración del Evento</h3>
+        <div class="w-16 h-1 bg-green-500 mx-auto rounded"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <!-- Tipo de evento -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Evento</label>
+          <div class="card flex justify-center">
+            <p-select 
+              [options]="eventTypes" 
+              [(ngModel)]="selectedEventType"
+              optionLabel="label" 
+              optionValue="value"
+              placeholder="Selecciona un evento"
+              class="w-full">
+            </p-select>
+          </div>
+        </div>
+
+        <!-- Fecha del evento -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Fecha del Evento</label>
+          <div class="card flex justify-center">
+            <p-datepicker 
+              [(ngModel)]="rangeDates"
+              [minDate]="minDate"
+              [maxDate]="maxDate"
+              selectionMode="range" 
+              [readonlyInput]="true"
+              placeholder="Selecciona fecha"
+              class="w-full" />
+          </div>
+        </div>
+
+        <!-- Hora de inicio -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Hora de Inicio</label>
+          <input 
+            type="time" 
+            [(ngModel)]="startTime"
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <!-- Hora de fin -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Hora de Fin</label>
+          <input 
+            type="time" 
+            [(ngModel)]="endTime"
+            class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+        </div>
+      </div>
+
+      <div class="text-center">
+        <p-button 
+          label="Obtener Pronóstico"
+          icon="pi pi-cloud"
+          [loading]="isLoading()"
+          [disabled]="!selectedPosition() || !rangeDates || rangeDates.length === 0"
+          (onClick)="getWeatherForecast()"
+          size="large"
+          class="px-8">
+        </p-button>
+      </div>
+    </p-card>
+
+    <!-- Resultados del pronóstico -->
+    <div *ngIf="weatherData() || errorMessage() || isLoading()">
+      <p-card>
+        <div class="text-center mb-6">
+          <h3 class="text-xl font-bold mb-2">Pronóstico de Condiciones</h3>
+          <div class="w-16 h-1 bg-orange-500 mx-auto rounded"></div>
+        </div>
+
+        <!-- Mensaje de error -->
+        <p-message 
+          *ngIf="errorMessage()" 
+          severity="error" 
+          [text]="errorMessage()!"
+          class="mb-4">
+        </p-message>
+
+        <!-- Loading -->
+        <div *ngIf="isLoading()" class="text-center py-8">
+          <i class="pi pi-spin pi-spinner text-4xl text-blue-500"></i>
+          <p class="mt-2 text-gray-600">Obteniendo pronóstico del clima...</p>
+        </div>
+
+        <!-- Datos del pronóstico -->
+        <div *ngIf="weatherData() && !isLoading()">
+          
+          <!-- Charts visuales -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Chart 1: Temperatura y Humedad -->
+            <div class="card">
+              <h4 class="text-lg font-semibold mb-4 text-center">Temperatura y Humedad</h4>
+              <p-chart 
+                type="line" 
+                [data]="temperatureChartData" 
+                [options]="temperatureChartOptions" 
+                class="h-[25rem]" />
+            </div>
+
+            <!-- Chart 2: Viento y Precipitación -->
+            <div class="card">
+              <h4 class="text-lg font-semibold mb-4 text-center">Viento y Precipitación</h4>
+              <p-chart 
+                type="line" 
+                [data]="chartData" 
+                [options]="chartOptions" 
+                class="h-[25rem]" />
             </div>
           </div>
 
-        <div class="space-y-6 mt-4">
-          <div class="flex flex-col gap-3">
-            <label class="text-sm font-medium font-size-20 font-bold">Nivel de Zoom</label>
-            <p-tag 
-              severity="success" 
-              [value]="'Zoom: ' + (zoom() | number: '1.2-2')"
-              class="w-fit">
-            </p-tag>
+          <!-- Tabla de datos por hora -->
+          <div class="mb-8">
+            <h4 class="text-lg font-semibold mb-4">Datos Detallados por Hora</h4>
+            <p-table [value]="weatherData()!.time" [scrollable]="true" scrollHeight="300px">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Hora</th>
+                  <th>Temperatura (°C)</th>
+                  <th>Viento (km/h)</th>
+                  <th>Humedad (%)</th>
+                  <th>Precipitación (mm)</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-time let-i="rowIndex">
+                <tr class="hover:bg-gray-50">
+                  <td>{{ formatTime(time) }}</td>
+                  <td>{{ weatherData()!.temp[i] | number: '1.1-1' }}</td>
+                  <td>{{ weatherData()!.wind[i] | number: '1.1-1' }}</td>
+                  <td>{{ weatherData()!.humidity[i] | number: '1.1-1' }}</td>
+                  <td>{{ weatherData()!.precipitation[i] | number: '1.1-1' }}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <p class="text-center text-sm text-gray-500 mt-2">
+              Los datos del pronóstico están disponibles hasta 16 días en el futuro.
+            </p>
           </div>
 
-
-          <div class="flex  gap-3 pt-4">
-            <p-button 
-              label="Centrar en Posición" 
-              icon="pi pi-map-marker" 
-              (onClick)="centerOnPosition()"
-              class="w-full">
-            </p-button>
-            
-            <p-button 
-              label="Reset Vista" 
-              icon="pi pi-refresh" 
-              [outlined]="true"
-              (onClick)="resetView()"
-              class="w-full">
-            </p-button>
+          <!-- Probabilidades de incomodidad -->
+          <div *ngIf="probabilities().length > 0">
+            <h4 class="text-lg font-semibold mb-4">Probabilidad de Incomodidad</h4>
+            <div class="space-y-4">
+              <div *ngFor="let prob of probabilities()" class="space-y-2">
+                <div class="flex justify-between items-center text-sm">
+                  <span class="font-semibold text-gray-700">{{ prob.label }}</span>
+                  <span>{{ prob.percentage | number: '1.0-0' }}%</span>
+                </div>
+                <p-progressBar 
+                  [value]="prob.percentage"
+                  [style]="{'background-color': '#e5e7eb'}"
+                  [color]="prob.color">
+                </p-progressBar>
+              </div>
+            </div>
           </div>
         </div>
       </p-card>
     </div>
 
-    <!-- Mapa - Columna derecha -->
-    <div class="col-span-12 lg:col-span-8 xl:col-span-9 space-y-4">
-      <p-card>
-        <div #mapContainer id="map-container" class=" h-150"></div>
-      </p-card>
-    </div>
-
-
-    
   </div>
+
 </div>

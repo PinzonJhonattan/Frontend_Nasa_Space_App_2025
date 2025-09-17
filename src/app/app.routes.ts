@@ -6,6 +6,7 @@ import { Intro } from './features/intro/intro';
 import { Activites } from './features/activites/activites';
 import { MapComponent } from './features/map/map';
 import { ConfigThemeComponent } from './features/config-Theme/config-Theme';
+import { FormComponent } from './features/form/form';
 
 export const routes: Routes = [
     {
@@ -44,6 +45,10 @@ export const routes: Routes = [
             {
                 path: "config",
                 component: ConfigThemeComponent 
+            },
+            {
+                path: "form",
+                component: FormComponent
             }
         ]
     }
